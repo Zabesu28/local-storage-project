@@ -1,6 +1,6 @@
 # Taskmate
 
-Taskmate est une application de gestion de tâches utilisant une base de données IndexedDB pour stocker les données localement. L'application permet aux utilisateurs de s'inscrire, se connecter, et gérer leurs tâches. Réalisé avec vite + react
+Taskmate est une application de gestion de tâches utilisant une base de données IndexedDB pour stocker les données localement. L'application permet aux utilisateurs de s'inscrire, se connecter, et gérer leurs tâches. Réalisé avec vite + react.
 
 ## Fonctionnalités
 
