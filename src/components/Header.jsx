@@ -19,8 +19,11 @@ export const Header = () => {
         <header>
             <div className="logo">
                 <img src={Logo} alt="Taskmate logo"/>
-                <span>Taskmate { user ? user.username : ''} |</span>
-                <button className="logout-btn" onClick={() => logout()}>Déconnexion</button>
+                <span>Taskmate { user ? user.username : ''} </span>
+                {
+                    user ?  (<><span>|</span><button className="logout-btn" onClick={() => logout()}>Déconnexion</button></>) : ''
+                }
+                
             </div>
             <div className="themeSelector">
                 <span onClick={() => setTheme("light")} className={theme === "light" ? "light activeTheme" : "light"}></span>

@@ -1,6 +1,10 @@
 /* eslint-disable react/prop-types */
 
+import { useContext } from "react";
+import { AuthContext } from "../AuthContext";
+
 export const AddTask = ({ taskList, setTaskList, task, setTask, updateTask }) => {
+  const { user } = useContext(AuthContext)
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -10,6 +14,7 @@ export const AddTask = ({ taskList, setTaskList, task, setTask, updateTask }) =>
         if (todo.id === task.id) {
           return {
             ...todo,
+            username: user.username,
             name: task.name,
             time: `${date.toLocaleTimeString()} ${date.toLocaleDateString()}`,
           };
@@ -21,6 +26,7 @@ export const AddTask = ({ taskList, setTaskList, task, setTask, updateTask }) =>
       const date = new Date();
       const newTask = {
         id: date.getTime(),
+        username: user.username,
         name: e.target.task.value,
         time: `${date.toLocaleTimeString()} ${date.toLocaleDateString()}`,
       };

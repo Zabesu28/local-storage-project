@@ -21,7 +21,7 @@ export const ShowTask = ({
           <span className="title">Todo</span>
           <span className="count">{taskList.length}</span>
         </div>
-        <button onClick={() => setTaskList([])} className="clearAll">
+        <button onClick={() => setTaskList(taskList)} className="clearAll">
           Clear All
         </button>
       </div>

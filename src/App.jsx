@@ -1,4 +1,4 @@
-import { getAllTasks, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Header from "./components/Header";
 import AddTask from "./components/AddTask";
 import Login from "./components/Login";
@@ -6,7 +6,7 @@ import Register from "./components/Register";
 import "./App.css";
 import { AuthContext } from "./AuthContext";
 import { ShowTask } from "./components/ShowTask";
-import { addTask, updateTask, deleteTask } from "./db";
+import { getAllTasks ,addTask, updateTask, deleteTask } from "./db";
 
 function App() {
   const [taskList, setTaskList] = useState(() => {
@@ -20,10 +20,15 @@ function App() {
   useEffect(() => {
     const fetchTasks = async () => {
       const tasks = await getAllTasks();
-      setTaskList(tasks);
+      let userTasks = [];
+      if(user){
+        userTasks = tasks.filter(task => task.username == user.username);
+      }
+      
+      setTaskList(userTasks);
     };
     fetchTasks();
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     const saveTasks = async () => {
@@ -49,6 +54,11 @@ function App() {
     } catch (error) {
       console.error('Erreur lors de la suppression de la tâche :', error);
     }
+  };
+
+  const handleDeleteAllTask = async (list) => {
+    list.map(task => deleteTask(task.id));
+    setTaskList([]);
   };
   
   const handleUpdateTask = async (taskToUpdate) => {
@@ -79,7 +89,7 @@ function App() {
       />
       <ShowTask
         taskList={taskList}
-        setTaskList={setTaskList}
+        setTaskList={handleDeleteAllTask}
         task={task}
         setTask={setTask}
         handleDeleteTask={handleDeleteTask}
